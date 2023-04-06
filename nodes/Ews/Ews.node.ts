@@ -8,6 +8,9 @@ import {
 	INodeTypeDescription,
 	deepCopy,
 	NodeOperationError,
+	ICredentialTestFunctions,
+	ICredentialsDecrypted,
+	INodeCredentialTestResult,
 } from 'n8n-workflow';
 
 import {
@@ -17,7 +20,6 @@ import {
 
 import {
 	buildEwsWithNtlm,
-	ewsNtlmApiTest,
 } from './Credentials';
 
 import * as Actions from './actions';
@@ -90,7 +92,22 @@ export class Ews implements INodeType {
 
 	methods = {
 		credentialTest: {
-			ewsNtlmApiTest
+			async ewsNtlmApiTest(this: ICredentialTestFunctions, credential: ICredentialsDecrypted): Promise<INodeCredentialTestResult> {
+				try {
+					const exchange = buildEwsWithNtlm(credential.data)
+
+					await exchange.GetServerTimeZones()
+				} catch (error) {
+					return {
+						status: 'Error',
+						message: `Settings are not valid or authentification failed: ${error}`,
+					};
+				}
+				return {
+					status: 'OK',
+					message: 'Authentication successful!',
+				};
+			}
 		}
 	};
 
@@ -128,7 +145,7 @@ async function exchangeService(func: IExecuteFunctions, idx: number): Promise<Ex
 	const authenticationMethod = func.getNodeParameter('authentication', idx) as string;
 	switch (authenticationMethod) {
 		case 'ntlm':
-			return buildEwsWithNtlm(await func.getCredentials('ews', idx));
+			return buildEwsWithNtlm(await func.getCredentials('ewsApi', idx));
 		default:
 			break;
 	}

@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/LuxCHanLu/n8n-nodes-ews.git"
+    "url": "https://github.com/LuxChanLu/n8n-nodes-ews.git"
   },
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,7 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/Ews.credentials.js"
+      "dist/credentials/EwsApi.credentials.js"
     ],
     "nodes": [
       "dist/nodes/Ews/Ews.node.js"
