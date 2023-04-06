@@ -5,7 +5,6 @@ import {
 	ICredentialDataDecryptedObject,
 } from 'n8n-workflow';
 import { ExchangeService, ExchangeVersion, WebCredentials, Uri, ConfigurationApi } from 'ews-javascript-api'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 const { ntlmAuthXhrApi } = require('ews-javascript-api-auth')
 

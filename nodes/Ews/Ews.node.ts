@@ -7,6 +7,7 @@ import {
 	INodeType,
 	INodeTypeDescription,
 	deepCopy,
+	NodeOperationError,
 } from 'n8n-workflow';
 
 import {
@@ -39,7 +40,7 @@ export class Ews implements INodeType {
 		outputs: ['main'],
 		credentials: [
 			{
-				name: 'ews',
+				name: 'ewsApi',
 				required: true,
 				testedBy: 'ewsNtlmApiTest',
 				displayOptions: {
@@ -131,5 +132,5 @@ async function exchangeService(func: IExecuteFunctions, idx: number): Promise<Ex
 		default:
 			break;
 	}
-	throw new Error('No valid authentification method')
+	throw new NodeOperationError(func.getNode(), new Error('No authentification method found'), { itemIndex: idx })
 }

@@ -29,7 +29,7 @@ export const itemOperations: INodeProperties[] = [
 				action: 'Get an item',
 			},
 			{
-				name: 'Set category',
+				name: 'Set Category',
 				value: 'setCategory',
 				description: 'Set an item category',
 				action: 'Set an item category',
@@ -61,6 +61,7 @@ export const itemDescription: INodeProperties[] = [
 		displayName: 'Well Known Folder',
 		name: 'wellKnownFolderName',
 		type: 'options',
+		default: '',
 		required: true,
 		displayOptions: {
 			show: {
@@ -68,11 +69,10 @@ export const itemDescription: INodeProperties[] = [
 				resource: ['item'],
 			},
 		},
-		default: WellKnownFolderNames[0],
 		options: WellKnownFolderNames.map(name => ({ name, value: WellKnownFolderName[name as any] }))
 	},
 	{
-		displayName: 'Item count',
+		displayName: 'Item Count',
 		name: 'itemCount',
 		type: 'number',
 		default: 100,

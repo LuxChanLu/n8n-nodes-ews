@@ -3,10 +3,10 @@ import { ExchangeVersion } from 'ews-javascript-api';
 
 const ExchangeNames = Object.keys(ExchangeVersion).filter(k => typeof ExchangeVersion[k as any] === "number")
 
-export class Ews implements ICredentialType {
-	name = 'ews';
+export class EwsApi implements ICredentialType {
+	name = 'ewsApi';
 
-	displayName = 'EWS - NTLM';
+	displayName = 'EWS - NTLM API';
 
 	properties: INodeProperties[] = [
 		{
