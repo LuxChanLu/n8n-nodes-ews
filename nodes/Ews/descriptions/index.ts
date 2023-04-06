@@ -1,5 +1,7 @@
 import { itemOperations, itemDescription } from './ItemDescription';
+import { attachmentOperations, attachmentDescription } from './AttachmentDescription';
 
 export {
-	itemOperations, itemDescription
+	itemOperations, itemDescription,
+	attachmentOperations, attachmentDescription,
 };

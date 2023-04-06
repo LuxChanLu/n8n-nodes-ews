@@ -10,7 +10,8 @@ import {
 } from 'n8n-workflow';
 
 import {
-	itemDescription, itemOperations
+	itemDescription, itemOperations,
+	attachmentDescription, attachmentOperations
 } from './descriptions';
 
 import {
@@ -77,7 +78,8 @@ export class Ews implements INodeType {
 			},
 
 
-			...itemOperations, ...itemDescription
+			...itemOperations, ...itemDescription,
+			...attachmentOperations, ...attachmentDescription
 		]
 	};
 
