@@ -61,6 +61,10 @@ export class Ews implements INodeType {
 						name: 'Item',
 						value: 'item',
 					},
+					{
+						name: 'Attachment',
+						value: 'attachment',
+					},
 				],
 			},
 			{

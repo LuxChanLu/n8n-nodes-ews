@@ -1,4 +1,4 @@
-import { BasePropertySet, EmailMessageSchema, ExchangeService, FindItemsResults, Item, ItemId, ItemView, PropertySet, WellKnownFolderName } from "ews-javascript-api"
+import { BasePropertySet, ConflictResolutionMode, EmailMessageSchema, ExchangeService, FindItemsResults, Item, ItemId, ItemView, PropertySet, WellKnownFolderName } from "ews-javascript-api"
 import { IDataObject, IExecuteFunctions, INodeExecutionData } from "n8n-workflow"
 import { safeGetter } from "../utils"
 
@@ -15,6 +15,18 @@ export async function get(func: IExecuteFunctions, exchange: ExchangeService, id
 	const items = await exchange.BindToItems([new ItemId(itemId)], new PropertySet(BasePropertySet.FirstClassProperties, EmailMessageSchema.Attachments))
 	for (const response of items.Responses) {
 		returnData.push({ json: transformItem(response.Item), pairedItem: idx })
+	}
+}
+
+export async function setCategory(func: IExecuteFunctions, exchange: ExchangeService, idx: number, returnData: INodeExecutionData[]): Promise<any> {
+	const itemId = func.getNodeParameter('itemId', idx) as string
+	const category = func.getNodeParameter('category', idx) as string
+	const items = await exchange.BindToItems([new ItemId(itemId)], new PropertySet(BasePropertySet.FirstClassProperties))
+	const item = items.Responses.at(0)?.Item
+	if (item && !item.Categories.Contains(category)) {
+		item.Categories.Add(category)
+		await item.Update(ConflictResolutionMode.AutoResolve)
+		returnData.push({ json: transformItem(item), pairedItem: idx })
 	}
 }
 

@@ -29,10 +29,10 @@ export const itemOperations: INodeProperties[] = [
 				action: 'Get an item',
 			},
 			{
-				name: 'Set categories',
-				value: 'set-categories',
-				description: 'Set an item categories',
-				action: 'Set an item categories',
+				name: 'Set category',
+				value: 'setCategory',
+				description: 'Set an item category',
+				action: 'Set an item category',
 			},
 		],
 	},
@@ -101,7 +101,7 @@ export const itemDescription: INodeProperties[] = [
 		},
 	},
 	/* -------------------------------------------------------------------------- */
-	/*                             item:set-categories                            */
+	/*                              item:setCategory                              */
 	/* -------------------------------------------------------------------------- */
 	{
 		displayName: 'Item ID',
@@ -111,20 +111,20 @@ export const itemDescription: INodeProperties[] = [
 		required: true,
 		displayOptions: {
 			show: {
-				operation: ['set-categories'],
+				operation: ['setCategory'],
 				resource: ['item'],
 			},
 		},
 	},
 	{
-		displayName: 'Categories',
-		name: 'categories',
-		type: 'collection',
+		displayName: 'Category',
+		name: 'category',
+		type: 'string',
 		default: '',
 		required: true,
 		displayOptions: {
 			show: {
-				operation: ['set-categories'],
+				operation: ['setCategory'],
 				resource: ['item'],
 			},
 		},
